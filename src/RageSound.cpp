@@ -29,7 +29,11 @@
 
 #include "RageSoundReader_Extend.h"
 #include "RageSoundReader_Pan.h"
+#ifdef HAVE_RUBBERBAND
+#include "RageSoundReader_RubberBand.h"
+#else
 #include "RageSoundReader_PitchChange.h"
+#endif
 #include "RageSoundReader_PostBuffering.h"
 #include "RageSoundReader_Preload.h"
 #include "RageSoundReader_Resample_Good.h"
@@ -223,7 +227,11 @@ bool RageSound::Load( std::string sSoundFilePath, bool bPrecache, const RageSoun
 
 	if( pParams->m_bSupportRateChanging )
 	{
+#ifdef HAVE_RUBBERBAND
+		RageSoundReader_RubberBand *pRate = new RageSoundReader_RubberBand( m_pSource );
+#else
 		RageSoundReader_PitchChange *pRate = new RageSoundReader_PitchChange( m_pSource );
+#endif
 		m_pSource = pRate;
 	}
 

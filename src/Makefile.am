@@ -520,7 +520,12 @@ RageFileDriverReadAhead.cpp RageFileDriverReadAhead.h \
 RageFileDriverSlice.cpp RageFileDriverSlice.h \
 RageFileDriverTimeout.cpp RageFileDriverTimeout.h
 
-Rage += $(Lua) $(jsoncpp) $(RageFile) $(RageSoundFileReaders) \
+
+if HAVE_RUBBERBAND
+ RubberBand = RageSoundReader_RubberBand.cpp RageSoundReader_RubberBand.h
+endif
+
+Rage += $(Lua) $(jsoncpp) $(RageFile) $(RageSoundFileReaders) $(RubberBand) \
 CubicSpline.cpp CubicSpline.h \
 RageBitmapTexture.cpp RageBitmapTexture.h \
 RageDisplay.cpp RageDisplay.h \

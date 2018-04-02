@@ -60,10 +60,12 @@
 /* Defined to 1 if the underlying system provides the posix_fadvise function. */
 #cmakedefine HAVE_POSIX_FADVISE 1
 
-/* Defined to 1 if the underlying system provides the pthread_mutex_timedlock function. */
+/* Defined to 1 if the underlying system provides the pthread_mutex_timedlock
+ * function. */
 #cmakedefine HAVE_PTHREAD_MUTEX_TIMEDLOCK 1
 
-/* Defined to 1 if the underlying system provides the pthread_cond_timedwait function. */
+/* Defined to 1 if the underlying system provides the pthread_cond_timedwait
+ * function. */
 #cmakedefine HAVE_PTHREAD_COND_TIMEDWAIT 1
 
 /* Provide a fallback if intptr_t is not defined. */
@@ -105,7 +107,11 @@ typedef long ssize_t;
 /* Defined to 1 if compiling with OGG support. */
 #cmakedefine HAS_OGG 1
 
-/* Defined to 1 if building on a windows system, and thus uses the windows loading window. */
+/* Defined to 1 if compiling with Rubberband support. */
+#cmakedefine HAVE_RUBBERBAND 1
+
+/* Defined to 1 if building on a windows system, and thus uses the windows
+ * loading window. */
 #cmakedefine NEED_WINDOWS_LOADING_WINDOW 1
 
 /* Defined to 1 if logging timing segment additions and removals. */
@@ -122,7 +128,7 @@ typedef long ssize_t;
 #define PBS_MARQUEE 0x08
 #endif
 #if !defined(HAVE_PBM_SETMARQUEE)
-#define PBM_SETMARQUEE (WM_USER+10)
+#define PBM_SETMARQUEE (WM_USER + 10)
 #endif
 #endif
 
@@ -142,8 +148,8 @@ typedef long ssize_t;
 #if !defined(HAVE_MKDIR)
 #error "No create directory function available. Aborting."
 #else
-#include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/types.h>
 #if defined(__MINGW32__) || defined(__MINGW64__)
 #define mkdir(path, mode) mkdir(path)
 #endif
@@ -152,7 +158,7 @@ typedef long ssize_t;
 
 /* Ensure we have a function for converting a string to a float. */
 #if !defined(HAVE_STRTOF)
-inline float strtof( const char *s, char **se ) { return (float) strtod( s, se ); }
+inline float strtof(const char *s, char **se) { return (float)strtod(s, se); }
 #endif
 
 /* Ensure we have an endianness defined. */

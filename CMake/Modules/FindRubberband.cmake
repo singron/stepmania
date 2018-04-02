@@ -1,0 +1,8 @@
+find_path(LIBRUBBERBAND_INCLUDE_DIR rubberband/RubberBandStretcher.h)
+
+find_library(LIBRUBBERBAND_LIBRARY rubberband)
+
+include(FindPackageHandleStandardArgs)
+find_package_handle_standard_args(LIBRUBBERBAND DEFAULT_MSG LIBRUBBERBAND_LIBRARY LIBRUBBERBAND_INCLUDE_DIR)
+
+mark_as_advanced(LIBRUBBERBAND_LIBRARY LIBRUBBERBAND_INCLUDE_DIR)

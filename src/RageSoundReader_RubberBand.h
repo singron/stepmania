@@ -1,38 +1,45 @@
-/* RageSoundReader_RubberBand - change the pitch and speed of an audio stream independently using RubberBand Library. */
+/* RageSoundReader_RubberBand - change the pitch and speed of an audio stream
+ * independently using RubberBand Library. */
 
 #ifndef RAGE_SOUND_READER_RUBBER_BAND_H
 #define RAGE_SOUND_READER_RUBBER_BAND_H
+
+#include "config.hpp"
 
 #ifndef HAVE_RUBBERBAND
 #error "HAVE_RUBBERBAND is not defined"
 #endif
 
 #include <rubberband/RubberBandStretcher.h>
+#include <string>
 #include "RageSoundReader_Filter.h"
 
-class RageSoundReader_RubberBand: public RageSoundReader_Filter
-{
-public:
-	RageSoundReader_RubberBand( RageSoundReader *pSource );
-	RageSoundReader_RubberBand( const RageSoundReader_RubberBand &cpy );
+class RageSoundReader_RubberBand : public RageSoundReader_Filter {
+   public:
+    RageSoundReader_RubberBand(RageSoundReader *pSource);
+    RageSoundReader_RubberBand(const RageSoundReader_RubberBand &cpy);
 
-	virtual int Read( float *pBuf, int iFrames );
-	virtual bool SetProperty( const RString &sProperty, float fValue );
+    virtual int Read(float *pBuf, int iFrames);
+    virtual bool SetProperty(const std::string &sProperty, float fValue);
 
-	void SetSpeedRatio( float fRatio ) { m_RubberBand.setTimeRatio(1/fRatio); }
-	void SetPitchRatio( float fRatio ) { m_RubberBand.setPitchScale(1/fRatio); }
+    void SetSpeedRatio(float fRatio) { m_RubberBand.setTimeRatio(1 / fRatio); }
+    void SetPitchRatio(float fRatio) { m_RubberBand.setPitchScale(1 / fRatio); }
 
-	virtual RageSoundReader_RubberBand *Copy() const { return new RageSoundReader_RubberBand(*this); }
+    virtual RageSoundReader_RubberBand *Copy() const {
+	return new RageSoundReader_RubberBand(*this);
+    }
 
-	virtual float GetStreamToSourceRatio() const {
-		return (1/m_RubberBand.getTimeRatio()) * m_pSource->GetStreamToSourceRatio();
-	}
+    virtual float GetStreamToSourceRatio() const {
+	return (1 / m_RubberBand.getTimeRatio()) *
+	       m_pSource->GetStreamToSourceRatio();
+    }
 
-private:
-	RubberBand::RubberBandStretcher m_RubberBand;
+   private:
+    RubberBand::RubberBandStretcher m_RubberBand;
 
-	// Swallow up warnings. If they must be used, define them.
-	RageSoundReader_RubberBand& operator=(const RageSoundReader_RubberBand& rhs);
+    // Swallow up warnings. If they must be used, define them.
+    RageSoundReader_RubberBand &operator=(
+	const RageSoundReader_RubberBand &rhs);
 };
 
 #endif

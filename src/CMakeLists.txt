@@ -379,6 +379,10 @@ if (HAS_MP3)
   endif()
 endif()
 
+if (HAVE_RUBBERBAND)
+	list(APPEND SMDATA_LINK_LIB ${LIBRUBBERBAND_LIBRARY})
+endif()
+
 if (NOT SYSTEM_PCRE_FOUND)
   list(APPEND SMDATA_LINK_LIB "pcre")
 endif()

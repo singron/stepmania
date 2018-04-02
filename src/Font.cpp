@@ -633,6 +633,7 @@ void Font::LoadFontPageSettings( FontPageSettings &cfg, IniFile &ini, const std:
 
 				if(int(wdata.size()) > num_frames_wide)
 				{
+					continue;
 					// wstrings don't work. Convert to std::string first.
 					std::string error = fmt::format("The font definition \"{0}\" assigns {1} characters to row {2} (\"{3}\"), but the font is only {4} characters wide.",
 						ini.GetPath(), wdata.size(), row, WStringToString(wdata), num_frames_wide);
